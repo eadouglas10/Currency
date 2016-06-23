@@ -1,8 +1,13 @@
 class Currency
 
-  def initialize(amount, code)
-    @amount = amount
-    @code = code
+  def initialize(amount, code = "")
+    if amount.to_s[0].to_i.to_s == amount.to_s[0]
+      @amount = amount
+      @code = code
+    else
+      
+    end
+
   end                           # => :initialize
 
   def amount
@@ -20,7 +25,24 @@ class Currency
   def add(cur_obj)
     if @code == cur_obj.code
       @amount += cur_obj.amount
+    else
+      return false
     end
   end                            # => :add
+
+  def subtract(cur_obj)
+    if @code == cur_obj.code
+      @amount -= cur_obj.amount
+    else
+      return false
+    end
+  end
+
+  def * (n)
+    @amount *= n
+  end
+
+    end
+
 
 end  # => :add
