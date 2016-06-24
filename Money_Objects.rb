@@ -1,12 +1,9 @@
-require_relative './Currency.rb'  # => true
+require_relative './Currency.rb'            # => true
+require_relative './Currency_Converter.rb'  # => true
 
-dollar = Currency.new(5, "Dollar")  # => #<Currency:0x007ff3ba9004b0 @amount=5, @code="Dollar">
-single = Currency.new(1, "Dollar")  # => #<Currency:0x007ff3ba901540 @amount=1, @code="Dollar">
+dollar = Currency.new(5, "Dollar")  # => #<Currency:0x007f8b539c7b70 @amount=5, @code="Dollar">
+single = Currency.new(1, "Dollar")  # => #<Currency:0x007f8b539c76e8 @amount=1, @code="Dollar">
 
-dollar.equals?(single)  # ~> NoMethodError: undefined method `amount' for #<Currency:0x007ff3ba901540 @amount=1, @code="Dollar">
+dollar.equals?(single)  # => false
 
-# ~> NoMethodError
-# ~> undefined method `amount' for #<Currency:0x007ff3ba901540 @amount=1, @code="Dollar">
-# ~>
-# ~> /Users/erikdouglas/Railsclass/wknd-hw1/Currency.rb:9:in `equals?'
-# ~> /Users/erikdouglas/Railsclass/wknd-hw1/Money_Objects.rb:6:in `<main>'
+converter1 = Currency_Converter.new {USD: 1.0, EUR: 0.74}  # => #<Currency_Converter:0x007f8b539c7030 @exchange_rates={:USD=>1.0, :EUR=>0.74}>

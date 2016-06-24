@@ -1,13 +1,16 @@
 class Currency
 
   def initialize(amount, code = "")
-    if amount.to_s[0].to_i.to_s == amount.to_s[0]
+    amount_chars = amount.to_s.chars
+    len = amount_chars.length
+    if amount_chars[0].to_i.to_s == amount_chars[0]
       @amount = amount
       @code = code
     else
-      
-    end
+      @code = amount.to_s[0]
+      @amount = amount.to_s[1...len].to_f
 
+    end
   end                           # => :initialize
 
   def amount
@@ -42,7 +45,7 @@ class Currency
     @amount *= n
   end
 
-    end
+    
 
 
 end  # => :add
