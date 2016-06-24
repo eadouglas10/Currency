@@ -2,27 +2,40 @@ class Currency
 
   def initialize(amount, code = "")
     amount_chars = amount.to_s.chars
+    first_char = amount_chars[0]
     len = amount_chars.length
-    if amount_chars[0].to_i.to_s == amount_chars[0]
+    if first_char.to_i.to_s == first_char
       @amount = amount
       @code = code
     else
-      @code = amount.to_s[0]
       @amount = amount.to_s[1...len].to_f
+      if  first_char == "$"
+        @code = "USD"
+      elsif first_char == "€"
+        @code = "EUR"
+      elsif first_char == "¥"
+        @code = "JPY"
+      else
+        raise "UnknownCurrencySymbolError"
+      end
     end
-  end                                                # => :initialize
+  end
 
   def amount
     return @amount
-  end               # => :amount
+  end
 
   def code
     return @code
-  end             # => :code
+  end
 
   def ==(cur_obj)
     return (@amount == cur_obj.amount && @code == cur_obj.code)
-  end                                                            # => :==
+  end
+
+  def reset(n)
+    @amount = n
+  end
 
   def +(cur_obj)
     if @code == cur_obj.code
@@ -36,7 +49,7 @@ class Currency
     if @code == cur_obj.code
       @amount -= cur_obj.amount
     else
-      return false
+      raise "Different Currecnty Code Error"
     end
   end                            # => :-
 
