@@ -9,43 +9,41 @@ class Currency
     else
       @code = amount.to_s[0]
       @amount = amount.to_s[1...len].to_f
-
     end
-  end                           # => :initialize
+  end                                                # => :initialize
 
   def amount
     return @amount
-  end
+  end               # => :amount
 
   def code
     return @code
-  end
+  end             # => :code
 
-  def equals?(cur_obj)
+  def ==(cur_obj)
     return (@amount == cur_obj.amount && @code == cur_obj.code)
-  end                                                          # => :equals?
+  end                                                            # => :==
 
-  def add(cur_obj)
+  def +(cur_obj)
     if @code == cur_obj.code
       @amount += cur_obj.amount
     else
-      return false
+      raise "Different Currency Code Error"
     end
-  end                            # => :add
+  end                                        # => :+
 
-  def subtract(cur_obj)
+  def -(cur_obj)
     if @code == cur_obj.code
       @amount -= cur_obj.amount
     else
       return false
     end
-  end
+  end                            # => :-
 
   def * (n)
     @amount *= n
-  end
-
-    
+  end             # => :*
 
 
-end  # => :add
+
+end  # => :*
