@@ -2,7 +2,7 @@ class Currency
 
   def initialize(amount, code = "")
     first_char = amount.to_s[0]
-    len = amount_chars.length
+    len = amount.to_s.length
     if first_char.to_i.to_s == first_char
       @amount = amount
       @code = code.to_s
@@ -39,24 +39,24 @@ class Currency
     @amount = n
   end
 
-  def +(cur_obj)
-    if @code == cur_obj.code
-      @amount += cur_obj.amount
+  def +(other)
+    if @code == other.code
+      Currency.new (@amount + other.amount, @code)
     else
       raise "Different Currency Code Error"
     end
   end                                        # => :+
 
-  def -(cur_obj)
-    if @code == cur_obj.code
-      @amount -= cur_obj.amount
+  def -(other)
+    if @code == other.code
+      Currency.new (@amount - other.amount, @code)
     else
       raise "Different Currecnty Code Error"
     end
   end                            # => :-
 
   def * (n)
-    @amount *= n
+    Currency.new (@amount * n, @code)
   end             # => :*
 
 
