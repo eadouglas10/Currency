@@ -35,30 +35,27 @@ class Currency
     return (@amount == cur_obj.amount && @code == cur_obj.code)
   end
 
-  def reset(n)
-    @amount = n
-  end
-
   def +(other)
     if @code == other.code
-      Currency.new (@amount + other.amount, @code)
+      Currency.new(@amount + other.amount, @code)
     else
-      raise "Different Currency Code Error"
+      raise DifferentCurrencyCodeError "Cannot add different currencies."
     end
-  end                                        # => :+
+  end
 
   def -(other)
     if @code == other.code
-      Currency.new (@amount - other.amount, @code)
+      Currency.new(@amount - other.amount, @code)
     else
-      raise "Different Currecnty Code Error"
+      raise DifferentCurrencyCodeError "Cannot subtract different currencies."
     end
-  end                            # => :-
+  end
 
   def * (n)
-    Currency.new (@amount * n, @code)
-  end             # => :*
+    Currency.new(@amount * n, @code)
+  end
 
+end
 
-
-end  # => :*
+class DifferentCurrencyCodeError < StandardError
+end
