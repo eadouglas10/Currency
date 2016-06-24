@@ -1,12 +1,14 @@
 class Currency
 
   def initialize(amount, code = "")
-    amount_chars = amount.to_s.chars
-    first_char = amount_chars[0]
+    first_char = amount.to_s[0]
     len = amount_chars.length
     if first_char.to_i.to_s == first_char
       @amount = amount
-      @code = code
+      @code = code.to_s
+      @code = "USD" if @code == "$"
+      @code = "EUR" if @code == "€"
+      @code = "JPY" if @code == "¥"
     else
       @amount = amount.to_s[1...len].to_f
       if  first_char == "$"
