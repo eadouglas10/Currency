@@ -4,6 +4,10 @@ class Currency_Converter
     @exchange_rates = exchange_rates
   end
 
+  def rate(cur_sym)
+    return @exchange_rates[cur_sym]
+  end
+
   def convert(cur_obj, cur_sym)
     if cur_obj.code == cur_sym.to_s
       return cur_obj
