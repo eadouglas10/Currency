@@ -1,6 +1,6 @@
 class Currency
 
-  def initialize(amount, code = "")
+  def initialize(amount = 0, code = "")
     first_char = amount.to_s[0]
     len = amount.to_s.length
     if first_char.to_i.to_s == first_char
