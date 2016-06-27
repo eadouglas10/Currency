@@ -2,11 +2,15 @@ class Currency_Converter
 
   def initialize(exchange_rates = {})
     @exchange_rates = exchange_rates
-  end
+  end                                  # => :initialize
+
+  def symbols
+    return @exchange_rates.keys
+  end                            # => :symbols
 
   def rate(cur_sym)
-    return @exchange_rates[cur_sym]
-  end
+    return @exchange_rates[cur_sym].to_f
+  end                                # => :rate
 
   def convert(cur_obj, cur_sym)
     if cur_obj.code == cur_sym.to_s
@@ -18,9 +22,9 @@ class Currency_Converter
       new_amount *= @exchange_rates[cur_sym.to_sym]
       Currency.new(new_amount, cur_sym)
     end
-  end
+  end                                                                                            # => :convert
 
-end
+end  # => :convert
 
-class UnknownCurrencyCodeError < StandardError
-end
+class UnknownCurrencyCodeError < StandardError  # => StandardError
+end                                             # => nil

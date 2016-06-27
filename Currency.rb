@@ -21,19 +21,19 @@ class Currency
         raise "UnknownCurrencySymbolError"
       end
     end
-  end
+  end                                       # => :initialize
 
   def amount
     return @amount
-  end
+  end               # => :amount
 
   def code
     return @code
-  end
+  end             # => :code
 
   def ==(cur_obj)
     return (@amount == cur_obj.amount && @code == cur_obj.code)
-  end
+  end                                                            # => :==
 
   def +(other)
     if @code == other.code
@@ -41,7 +41,7 @@ class Currency
     else
       raise DifferentCurrencyCodeError "Cannot add different currencies."
     end
-  end
+  end                                                                      # => :+
 
   def -(other)
     if @code == other.code
@@ -49,13 +49,13 @@ class Currency
     else
       raise DifferentCurrencyCodeError "Cannot subtract different currencies."
     end
-  end
+  end                                                                           # => :-
 
   def * (n)
     Currency.new(@amount * n, @code)
-  end
+  end                                 # => :*
 
-end
+end  # => :*
 
-class DifferentCurrencyCodeError < StandardError
-end
+class DifferentCurrencyCodeError < StandardError  # => StandardError
+end                                               # => nil

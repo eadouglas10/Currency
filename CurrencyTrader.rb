@@ -2,29 +2,36 @@ class CurrencyTrader
 
   def initialize(converter_arr)
     @converters = converter_arr
-    @symbols = {}
-    #@converters[0].each {|sym, val| @symbols.push(sym)}
-  end
+    @statements = []
+  end                            # => :initialize
 
-  def trade(converter1, converter2)
-    profit = 0
-    converter2.each do |sym, val|
-      if converter2[sym]/converter1[sym] > profit
-        profit = converter2[sym]/converter1[sym]
-    end
-  end
+  def track
+    return @statements
+  end                   # => :track
 
-  def invest()
-    len = @converters.length
-    investments = []
-    returns = []
-    for x in 1...len
-      @converters[x].each do |sym, value|
-        returns
+  def trade(converter1, converter2, investment)
+    margin = 1
+    cur_code = nil
+    codes = converter1.symbols
+    codes.each do |sym|
+      ratio = converter2.rate(sym) / converter1.rate(sym)
+      if ratio > margin
+        margin = ratio
+        cur_code = sym
       end
     end
+    return [cur_code, margin * investment]
   end
 
-end
 
-converters[1][:USD]/converters
+
+  def invest(principal)
+    len = @converters.length
+    holdings = [:USD, principal]
+    for x in 1...len
+      holdings = trade(@converters[x - 1], @converters[x], holdings[1])
+      @statements.push(holdings)
+    end
+  end                                                                    # => :invest
+
+end  # => :invest
